@@ -1,0 +1,5 @@
+{
+  "app": { "title": "Private translation cloud" },
+  "cta": { "start": "Начать перевод", "learn": "Узнать больше" },
+  "nav": { "docs": "Документация" }
+}
