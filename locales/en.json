@@ -1,5 +1,16 @@
 {
-  "app": { "title": "Private Translation Cloud" },
-  "cta": { "start": "Start translating", "learn": "Learn more" },
-  "nav": { "docs": "Documentation" }
+  "app": {
+    "title": "Private Translation Cloud"
+  },
+  "cta": {
+    "start": "Start translating",
+    "learn": "Learn more"
+  },
+  "nav": {
+    "docs": "Documentation"
+  },
+  "status": {
+    "ready": "Ready to translate",
+    "running": "Translation in progress"
+  }
 }

@@ -1,7 +1,11 @@
 name: Translate
+
 on:
   push:
     branches: [main]
+  # Added to check what the action does on a pull_request event: the run sits
+  # on the merge ref, so it must refuse rather than open a pull request.
+  pull_request: {}
   workflow_dispatch: {}
 
 jobs:
@@ -12,6 +16,17 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v7
+
+      # A caller's job is not a clean room: an install rewrites a lockfile, a
+      # build drops artefacts. None of it belongs in a translation PR.
+      - name: dirty the workspace before translating
+        run: |
+          mkdir -p dist
+          echo "console.log('build output')" > dist/bundle.js
+          printf '{\n  "name": "ptc-ci-demo",\n  "lockfileVersion": 3,\n  "touched": true\n}\n' > package-lock.json
+          echo "" >> README.md
+          echo "A line an earlier step appended." >> README.md
+
       - uses: OnTheGoSystems/ptc-action@v1
         with:
           api-token: ${{ secrets.PTC_API_TOKEN }}
